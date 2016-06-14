@@ -16,11 +16,13 @@
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
   <script src="/javascript/application.js"></script>
 
-  <title></title>
+  <title>Track listings</title>
 </head>
+
 <body class="container">
-  <header>
-  <div class="login-info">
+  <header class="page-header">
+  <div class="login-info text-right">
+    <h1>Music Wall</h1>
     <% if current_user %>
       <%= current_user.username %>
       <a href="/logout"> Logout </a>

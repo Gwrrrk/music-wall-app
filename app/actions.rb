@@ -3,6 +3,11 @@ helpers do
   def current_user
     User.find_by(id: session[:user_id])
   end
+
+  def allow_new_comment
+    current_user.reviews.find_by({track_id: @track.id})
+  end
+  
 end
 
 get '/' do
@@ -53,7 +58,7 @@ get '/logout' do
 end
 
 get '/tracks' do
-	@tracks = Track.all
+	@tracks = Track.all.sort {|a,b| b.like_count <=> a.like_count}
 	erb :'tracks/index'
 end
 
@@ -100,8 +105,9 @@ post '/reviews' do
     
   text = params[:text]
   track_id = params[:track_id]
+  rating = params[:rating]
     
-  review = Review.new({ text: text, track_id: track_id, user_id: current_user.id})
+  review = Review.new({ text: text, track_id: track_id, user_id: current_user.id, rating: rating})
     
   review.save
   redirect(back)
@@ -110,6 +116,6 @@ end
 delete '/reviews/:id' do
    review = Review.find(params[:id])
    review.destroy
-   
+
    redirect(back)
 end
