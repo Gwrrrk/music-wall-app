@@ -20,5 +20,39 @@
 	Added on <%= @track.created_at %>
 </p>
 
+<p>
+	<% if current_user %>
+		<% if current_user.reviews.count > 1%>
+
+		<% else %>
+			Please add a review!
+			<form action="/reviews" method="post">
+				<input type="hidden" name="track_id" value="<%=@track.id%>">
+				<textarea rows="3" cols="100" type="text" name="text"></textarea>
+				<button class = "button" type="submit">Submit </button>
+			</form>
+		<% end %>
+	<% else %>
+		<b>You must sign in to leave a review!</b>
+	<% end %>
+</p>
+
+<hr/>
+
+
+<% @track.reviews.each do |review| %>
+	<p>
+		<%= review.user.username%>:<%= review.text %>
+		<% if current_user && review.user_id == current_user.id %>
+				<form action="/reviews/<%= review.id %>" method="post">
+					<input name="_method" type="hidden" value="delete">
+       		<button class="button" type="submit">
+           	Delete post
+       		</button>
+				</form>
+		<% end %>
+	</p>
+<% end %>
+
 <hr/>
 <a href="/tracks">Back to All Tracks</a>

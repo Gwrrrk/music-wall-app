@@ -8,7 +8,7 @@
 
     <% if current_user %>
     	<% if like = current_user.likes.find_by({track_id: track.id})%>
-    		<form action="/likes/<%= like.id %>" method="POST">
+    		<form action="/likes/<%= like.id %>" method="post">
        	<input name="_method" type="hidden" value="delete">
        	<button class="button user-like" type="submit">
            <%= track.like_count %> likes

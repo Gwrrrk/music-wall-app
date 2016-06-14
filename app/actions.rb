@@ -95,3 +95,21 @@ post '/tracks' do
 		erb :'/tracks/new'
 	end
 end
+
+post '/reviews' do
+    
+  text = params[:text]
+  track_id = params[:track_id]
+    
+  review = Review.new({ text: text, track_id: track_id, user_id: current_user.id})
+    
+  review.save
+  redirect(back)
+end
+
+delete '/reviews/:id' do
+   review = Review.find(params[:id])
+   review.destroy
+   
+   redirect(back)
+end
