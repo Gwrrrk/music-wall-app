@@ -1,0 +1,24 @@
+<h1> <%= @track.song_title %> </h1>
+
+<p>
+	By: <%= @track.author %>
+</p>
+
+<p>
+	<% if @track.user_id %>
+		Posted by: <%= @track.user.username %>
+	<% else %>
+		Posted by:
+	<% end %>
+</p>
+
+<p>
+	<%= @track.url %>
+</p>
+
+<p>
+	Added on <%= @track.created_at %>
+</p>
+
+<hr/>
+<a href="/tracks">Back to All Tracks</a>

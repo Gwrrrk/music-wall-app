@@ -1,0 +1,33 @@
+<% @tracks.each do |track| %>
+  <div class="track">
+    <h3><a href="/tracks/<%=track.id%>"> <%= track.song_title %></a> <small>(by: <%= track.author %>)</small></h3>
+    
+    <p>
+    <%= track.url %>
+    </p>
+
+    <% if current_user %>
+    	<% if like = current_user.likes.find_by({track_id: track.id})%>
+    		<form action="/likes/<%= like.id %>" method="POST">
+       	<input name="_method" type="hidden" value="delete">
+       	<button class="button user-like" type="submit">
+           <%= track.like_count %> likes
+       	</button>
+   		</form>
+
+    	<% else %>
+
+				<form action="/likes" method="post">
+					<input type="hidden" name="track_id" value="<%=track.id%>">
+  				<button class="button" type="submit">
+          	<%= track.like_count %> likes
+       		</button>
+  			</form>
+  		<% end %>
+		<% end %>
+
+  </div>
+<% end %>
+
+<hr/>
+<a href="tracks/new"> Create a new track listing </a>
