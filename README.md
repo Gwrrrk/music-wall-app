@@ -1,10 +1,3 @@
-Sinatra
-=============
+This was an exercise to create a "Music Wall" Application in the 4th week of lighthouse labs bootcamp.
 
-Brought to you by Lighthouse Labs
-
-## Getting Started
-
-1. `bundle install`
-2. `shotgun -p 3000 -o 0.0.0.0`
-3. Visit `http://localhost:3000/` in your browser
+This was built using Sinatra and includes newly learned concepts like handling user authentication, proper routing, further experience using an ORM, etc.
